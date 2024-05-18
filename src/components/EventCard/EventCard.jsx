@@ -24,6 +24,7 @@ const EventCard = ({ event }) => {
 
   const handleViewLinkClick = () => {
     dispatch(setEventTitle(title));
+    dispatch(setEventId(_id));
   };
 
   return (
@@ -37,7 +38,7 @@ const EventCard = ({ event }) => {
         <StyledRegisterLink to={`/register`} onClick={handleRegisterLinkClick}>
           Register
         </StyledRegisterLink>
-        <StyledViewLink to={`/participants/${_id}`} onClick={handleViewLinkClick}>
+        <StyledViewLink to={`/participants`} onClick={handleViewLinkClick}>
           View
         </StyledViewLink>
       </StyledLinkContainer>

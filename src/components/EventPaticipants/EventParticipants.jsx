@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import { selectParticipants } from '../../redux/participants/selectors.js';
 import ParticipantCard from './ParticipantCard/ParticipantCard.jsx';
@@ -9,10 +9,11 @@ import {
   StyledInput,
   StyledParticipantsList,
 } from './EventParticipants.styled.js';
-import { selectEventTitle } from '../../redux/events/selectors.js';
+import { selectEventId, selectEventTitle } from '../../redux/events/selectors.js';
 
 const EventParticipants = () => {
-  const { eventId } = useParams();
+  // const { eventId } = useParams();
+  const eventId = useSelector(selectEventId);
   const participants = useSelector(selectParticipants);
   const eventTitle = useSelector(selectEventTitle);
   const [search, setSearch] = useState('');
