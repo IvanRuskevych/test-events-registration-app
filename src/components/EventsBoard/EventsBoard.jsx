@@ -1,18 +1,15 @@
-// import { useSelector, useDispatch } from "react-redux";
-// import { fetchEvents } from "../redux/actions";
+import { useSelector } from "react-redux";
 import EventCard from "../EventCard/EventCard.jsx";
-import events from "../../../events.json";
 import { StyledContainer } from "./EventsBoard.styled.js";
-const EventsBoard = () => {
-  // const dispatch = useDispatch();
-  // const events = useSelector((state) => state.events);
+import { eventsSelectors } from "../../redux/events/selectors.js";
 
-  // useEffect(() => {
-  //   dispatch(fetchEvents(1, 10, "title", "asc"));
-  // }, [dispatch]);
+const EventsBoard = () => {
+  const events = useSelector(eventsSelectors);
+  const isLoading = useSelector((state) => state.isLoading);
 
   return (
     <StyledContainer>
+      {isLoading && <p>isLoading</p>}
       {events.map((event) => (
         <EventCard key={event._id} event={event} />
       ))}
