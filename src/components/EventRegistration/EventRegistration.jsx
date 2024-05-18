@@ -1,5 +1,5 @@
-import { StyledEventRegistrationContainer, StyledTitle } from './EventRegistration.styled.js';
 import EventForm from './EventForm/EventForm.jsx';
+import { StyledEventRegistrationContainer, StyledTitle } from './EventRegistration.styled.js';
 
 const EventRegistration = () => {
   return (

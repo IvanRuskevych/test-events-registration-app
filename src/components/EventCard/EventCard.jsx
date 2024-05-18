@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setEventId, setEventTitle } from '../../redux/events/slice.js';
+
 import {
   StyledEventCard,
   StyledEventDate,
@@ -9,36 +12,47 @@ import {
   StyledRegisterLink,
   StyledViewLink,
 } from './EventCard.styled.js';
-import { useDispatch } from 'react-redux';
-import { setEventId } from '../../redux/events/slice.js';
 
 const EventCard = ({ event }) => {
-  const { title, description, eventDate, organizer, _id } = event;
   const dispatch = useDispatch();
-  const handleLinkClick = () => {
+  const { title, description, eventDate, organizer, _id } = event;
+  const formatedEventDate = new Date(eventDate).toLocaleDateString();
+
+  const handleRegisterLinkClick = () => {
     dispatch(setEventId(_id));
+  };
+
+  const handleViewLinkClick = () => {
+    dispatch(setEventTitle(title));
   };
 
   return (
     <StyledEventCard className="event-card">
       <StyledEventTitle>{title}</StyledEventTitle>
       <StyledEventDescription>{description}</StyledEventDescription>
-
-      <StyledEventDate>{new Date(eventDate).toLocaleDateString()}</StyledEventDate>
+      <StyledEventDate>{formatedEventDate}</StyledEventDate>
       <StyledEventOrganizer>{organizer}</StyledEventOrganizer>
 
       <StyledLinkContainer>
-        <StyledRegisterLink to={`/register`} onClick={handleLinkClick}>
+        <StyledRegisterLink to={`/register`} onClick={handleRegisterLinkClick}>
           Register
         </StyledRegisterLink>
-        <StyledViewLink to={`/participants/${_id}`}>View</StyledViewLink>
+        <StyledViewLink to={`/participants/${_id}`} onClick={handleViewLinkClick}>
+          View
+        </StyledViewLink>
       </StyledLinkContainer>
     </StyledEventCard>
   );
 };
 
 EventCard.propTypes = {
-  event: PropTypes.any,
+  event: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    eventDate: PropTypes.string.isRequired,
+    organizer: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default EventCard;

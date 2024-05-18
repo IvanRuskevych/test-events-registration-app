@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { selectEventId } from '../../../redux/events/selectors.js';
 import { useSendData } from '../../../hooks/axiosAPI.js';
+import { selectEventId } from '../../../redux/events/selectors.js';
 
 import {
   StyledButton,
