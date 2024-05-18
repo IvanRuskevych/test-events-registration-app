@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getAllEventsThunk } from "./operations.js";
+import { createSlice } from '@reduxjs/toolkit';
+import { getAllEventsThunk } from './operations.js';
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.isLoading = true;
   state.error = null;
 };
@@ -16,14 +16,22 @@ const handleFulfilled = (state, { payload }) => {
 };
 
 const eventsSlice = createSlice({
-  name: "events",
+  name: 'events',
+
   initialState: {
     isLoading: false,
     error: false,
     events: [],
+    eventId: null,
   },
 
-  extraReducers: (builder) => {
+  reducers: {
+    setEventId(state, { payload }) {
+      state.eventId = payload;
+    },
+  },
+
+  extraReducers: builder => {
     builder.addCase(getAllEventsThunk.pending, handlePending);
     builder.addCase(getAllEventsThunk.rejected, handleRejected);
     builder.addCase(getAllEventsThunk.fulfilled, handleFulfilled);
@@ -31,3 +39,4 @@ const eventsSlice = createSlice({
 });
 
 export const eventsReducer = eventsSlice.reducer;
+export const { setEventId } = eventsSlice.actions;

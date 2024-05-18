@@ -1,1 +1,2 @@
-export const eventsSelectors = (state) => state.events.events;
+export const selectEvents = state => state.events.events;
+export const selectEventId = state => state.events.eventId;

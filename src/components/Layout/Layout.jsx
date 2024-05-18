@@ -1,18 +1,21 @@
-import { Outlet } from "react-router-dom";
-import logo from "../../assets/logo.svg";
-import { Container, IconLogo, IconWrapper, Section } from "./Layout.styled.js";
-// import logo from "../../assets/icons/logo.svg";
+import { NavLink, Outlet } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
+import { IconLogo, LogoWrapper, StyledMain } from './Layout.styled.js';
 
 const Layout = () => {
   return (
-    <Container>
-      <Section>
-        <IconWrapper>
-          <IconLogo src={logo} alt="icon logo" />
-        </IconWrapper>
+    <>
+      <header>
+        <LogoWrapper>
+          <NavLink to={'/'}>
+            <IconLogo src={logo} alt="icon logo" />
+          </NavLink>
+        </LogoWrapper>
+      </header>
+      <StyledMain>
         <Outlet />
-      </Section>
-    </Container>
+      </StyledMain>
+    </>
   );
 };
 
