@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+
 import logo from '../../assets/logo.svg';
 import { IconLogo, LogoWrapper, StyledMain } from './Layout.styled.js';
 

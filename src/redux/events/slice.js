@@ -9,34 +9,36 @@ const handleRejected = (state, { err }) => {
   state.isLoading = false;
   state.error = err.message;
 };
-
-const handleFulfilled = (state, { payload }) => {
+const handleFulfilledEvents = (state, { payload }) => {
   state.isLoading = false;
   state.events = payload;
 };
 
 const eventsSlice = createSlice({
   name: 'events',
-
   initialState: {
     isLoading: false,
     error: false,
-    events: [],
     eventId: null,
+    eventTitle: '',
+    events: [],
   },
 
   reducers: {
     setEventId(state, { payload }) {
       state.eventId = payload;
     },
+    setEventTitle(state, { payload }) {
+      state.eventTitle = payload;
+    },
   },
 
   extraReducers: builder => {
     builder.addCase(getAllEventsThunk.pending, handlePending);
     builder.addCase(getAllEventsThunk.rejected, handleRejected);
-    builder.addCase(getAllEventsThunk.fulfilled, handleFulfilled);
+    builder.addCase(getAllEventsThunk.fulfilled, handleFulfilledEvents);
   },
 });
 
 export const eventsReducer = eventsSlice.reducer;
-export const { setEventId } = eventsSlice.actions;
+export const { setEventId, setEventTitle } = eventsSlice.actions;
