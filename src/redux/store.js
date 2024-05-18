@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { eventsReducer } from './events/slice.js';
-import { participantsReducer } from './participants/slice.js';
+import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+import { appReducer } from './reducer.js';
 
-export default configureStore({
-  reducer: {
-    events: eventsReducer,
-    participants: participantsReducer,
-  },
+export const store = configureStore({
+  reducer: appReducer,
+
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistedStore = persistStore(store);
