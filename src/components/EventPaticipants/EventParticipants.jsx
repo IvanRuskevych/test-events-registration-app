@@ -18,7 +18,6 @@ const EventParticipants = () => {
 
   const eventParticipants = participants.filter(el => el.eventId === eventId);
   const filteredParticipants = eventParticipants.filter(participant => {
-    console.log('participant', participant);
     return (
       participant.fullName.toLowerCase().includes(search.toLowerCase()) ||
       participant.email.toLowerCase().includes(search.toLowerCase())

@@ -10,7 +10,6 @@ const handleRejected = (state, { err }) => {
   state.error = err.message;
 };
 const handleFulfilledEvents = (state, { payload }) => {
-  console.log('payload', payload);
   const { total, events, page } = payload;
   state.isLoading = false;
   state.events = [...state.events, ...events];
@@ -38,7 +37,6 @@ const eventsSlice = createSlice({
       state.eventTitle = payload;
     },
     resetPage(state, { payload }) {
-      console.log('setPage payload', payload);
       state.page = payload;
     },
     resetEvents(state, { payload }) {
