@@ -12,6 +12,3 @@ export const getAllEventsThunk = createAsyncThunk(
     }
   }
 );
-
-// dispatch(getAllEventsThunk({ page: 2, limit: 20 })); // Виклик зі специфічними значеннями page та limit
-// dispatch(getAllEventsThunk()); // Виклик зі значеннями за замовчуванням (page = 1, limit = 10)

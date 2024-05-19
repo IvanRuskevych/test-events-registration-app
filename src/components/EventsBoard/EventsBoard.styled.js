@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const StyledEventTitle = styled.h2`
+  font-size: 1.5em;
+  margin-bottom: 10px;
+`;
+
 export const StyledInput = styled.input`
   margin-bottom: 16px;
   padding: 8px;

@@ -11,11 +11,11 @@ const handleRejected = (state, { err }) => {
 };
 const handleFulfilledEvents = (state, { payload }) => {
   console.log('payload', payload);
-  const { total, events } = payload;
-
+  const { total, events, page } = payload;
   state.isLoading = false;
   state.events = [...state.events, ...events];
   state.total = total;
+  state.page = page + 1;
 };
 
 const eventsSlice = createSlice({
@@ -27,6 +27,7 @@ const eventsSlice = createSlice({
     eventTitle: '',
     events: [],
     total: 0,
+    page: 1,
   },
 
   reducers: {
@@ -35,6 +36,13 @@ const eventsSlice = createSlice({
     },
     setEventTitle(state, { payload }) {
       state.eventTitle = payload;
+    },
+    resetPage(state, { payload }) {
+      console.log('setPage payload', payload);
+      state.page = payload;
+    },
+    resetEvents(state, { payload }) {
+      state.events = payload;
     },
   },
 
@@ -46,4 +54,4 @@ const eventsSlice = createSlice({
 });
 
 export const eventsReducer = eventsSlice.reducer;
-export const { setEventId, setEventTitle, setPage } = eventsSlice.actions;
+export const { setEventId, setEventTitle, resetPage, resetEvents } = eventsSlice.actions;

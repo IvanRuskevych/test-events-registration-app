@@ -18,7 +18,6 @@ export const StyledParticipantsList = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
-  padding: 10px;
 `;
 
 export const StyledInput = styled.input`

@@ -9,8 +9,8 @@ export const StyledItem = styled.li`
   padding: 16px;
   background-color: #f9f9f9;
 
-  width: 200px; /* Збільшення ширини */
-  min-width: 200px; /* Мінімальна ширина */
+  width: 200px;
+  min-width: 200px;
 `;
 
 export const StyledParticipantName = styled.h3`

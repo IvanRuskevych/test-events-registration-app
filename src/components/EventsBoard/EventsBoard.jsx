@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { selectEvents, selectTotal } from '../../redux/events/selectors.js';
+import { selectEvents, selectPage, selectTotal } from '../../redux/events/selectors.js';
+import { getAllEventsThunk } from '../../redux/events/operations.js';
 import { formatEventDate } from '../../utils';
 
 import EventCard from '../EventCard/EventCard.jsx';
-import { StyledContainer, StyledInput } from './EventsBoard.styled.js';
-import { getAllEventsThunk } from '../../redux/events/operations.js';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { useLocation } from 'react-router-dom';
+import { StyledContainer, StyledEventTitle, StyledInput } from './EventsBoard.styled.js';
 
 const EventsBoard = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(2);
-  console.log('page', page);
+  const page = useSelector(selectPage);
 
   const events = useSelector(selectEvents);
   const total = useSelector(selectTotal);
@@ -35,25 +33,14 @@ const EventsBoard = () => {
 
   const fetchMoreData = () => {
     if (events.length >= total) {
-      setHasMore(false);
-      return;
+      return setHasMore(false);
     }
-    dispatch(getAllEventsThunk({ page, limit: 10 }));
-    setPage(prevPage => prevPage + 1);
-    console.log('prevPage=>page', page);
+    dispatch(getAllEventsThunk({ page }));
   };
-
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (pathname === '/') {
-      dispatch(getAllEventsThunk({ page: 1, limit: 10 }));
-    }
-  }, [dispatch, pathname]);
 
   return (
     <>
-      <h2>{`Events`}</h2>
+      <StyledEventTitle>{`Events`}</StyledEventTitle>
       <StyledInput type="text" placeholder="Search ..." value={search} onChange={handleSearch} />
       <InfiniteScroll
         dataLength={events.length}
@@ -62,7 +49,6 @@ const EventsBoard = () => {
         loader={<h4>Loading...</h4>}
       >
         <StyledContainer>
-          {/*{isLoading && <p>isLoading</p>}*/}
           {events && filteredEvents.map(event => <EventCard key={event._id} event={event} />)}
         </StyledContainer>
       </InfiniteScroll>
