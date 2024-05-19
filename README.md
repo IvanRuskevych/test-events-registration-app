@@ -31,6 +31,8 @@ Ensure you have Node.js installed (version 14 or higher). If not, download and i
 
 ### Backend Part is Deployed on [render.com](https://render.com/)
 
+### Database: MongoDB
+
 ### Links to the Repositories
 
 1. [Frontend](https://github.com/IvanRuskevych/test-events-registration-app)
