@@ -15,8 +15,10 @@ const ParticipantCard = ({ participant }) => {
 };
 
 ParticipantCard.propTypes = {
-  // participant: PropTypes.shape({})
-  participant: PropTypes.any,
+  participant: PropTypes.shape({
+    fullName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
 };
 
 export default ParticipantCard;
