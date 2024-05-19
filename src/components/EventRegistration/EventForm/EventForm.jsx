@@ -28,7 +28,7 @@ const EventForm = () => {
   const handleSubmitForm = async data => {
     const newParticipant = { ...data, eventId };
     await sendData('/participants', newParticipant);
-    reset();
+    // reset();
   };
 
   return (
