@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import { useParams } from 'react-router-dom';
-
 import { selectParticipants } from '../../redux/participants/selectors.js';
 import ParticipantCard from './ParticipantCard/ParticipantCard.jsx';
 import {
@@ -30,7 +29,7 @@ const EventParticipants = () => {
   };
 
   return (
-    <StyledEventParticipants className="event-participants">
+    <StyledEventParticipants>
       <h2>{`"${eventTitle}" participants`}</h2>
       <StyledInput
         type="text"
