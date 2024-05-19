@@ -8,6 +8,9 @@ export const StyledItem = styled.li`
   border-radius: 8px;
   padding: 16px;
   background-color: #f9f9f9;
+
+  width: 200px; /* Збільшення ширини */
+  min-width: 200px; /* Мінімальна ширина */
 `;
 
 export const StyledParticipantName = styled.h3`
@@ -17,6 +20,6 @@ export const StyledParticipantName = styled.h3`
 `;
 
 export const StyledParticipantEmail = styled.p`
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: #666;
 `;
