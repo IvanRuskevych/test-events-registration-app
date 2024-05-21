@@ -10,9 +10,10 @@ import {
   StyledCheckboxWrapper,
   StyledEventForm,
   StyledInput,
-  StyledInputWrapper,
   StyledLabel,
 } from './EventForm.styled.js';
+import FormField from './FormField/FormField.jsx';
+import { FIELDS_PATTERN } from '../../../constants/index.js';
 
 const EventForm = () => {
   const {
@@ -20,7 +21,7 @@ const EventForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: 'onChange' });
   const { sendData } = useSendData();
 
   const eventId = useSelector(selectEventId);
@@ -33,47 +34,66 @@ const EventForm = () => {
 
   return (
     <StyledEventForm onSubmit={handleSubmit(handleSubmitForm)}>
-      <StyledInputWrapper>
-        <StyledLabel>Full Name</StyledLabel>
-        <StyledInput {...register('fullName', { required: 'Full name is required' })} />
-      </StyledInputWrapper>
-      {errors.fullName && <p>{errors.fullName.message}</p>}
+      <FormField
+        name={'fullName'}
+        title={'Full Name'}
+        validation={register('fullName', {
+          required: 'Full name is required',
+          minLength: {
+            value: 2,
+            message: 'Має бути від 2 до 35 символів',
+          },
+          maxLength: {
+            value: 35,
+            message: 'Має бути від 2 до 35 символів',
+          },
+        })}
+        fieldErrors={errors.fullName}
+      />
 
-      <StyledInputWrapper>
-        <StyledLabel>Email</StyledLabel>
-        <StyledInput type="email" {...register('email', { required: 'Email is required' })} />
-      </StyledInputWrapper>
-      {errors.email && <p>{errors.email.message}</p>}
+      <FormField
+        name={'email'}
+        title={'Email'}
+        validation={register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: FIELDS_PATTERN.EMAIL,
+            message: 'Не відповідає формату *@*.*',
+          },
+        })}
+        fieldErrors={errors.email}
+      />
 
-      <StyledInputWrapper>
-        <StyledLabel>Date of Birth</StyledLabel>
-        <StyledInput
-          type="date"
-          {...register('dateOfBirth', { required: 'Date of birth is required' })}
-        />
-      </StyledInputWrapper>
-      {errors.dateOfBirth && <p>{errors.dateOfBirth.message}</p>}
+      <FormField
+        type="date"
+        name={'dateOfBirth'}
+        title={'Date of Birth'}
+        validation={register('dateOfBirth', { required: 'Date of birth is required' })}
+        fieldErrors={errors.dateOfBirth}
+      />
 
       <StyledLabel>Where did you hear about this event?</StyledLabel>
       <StyledCheckboxWrapper>
-        <StyledInput
-          type="radio"
-          value="Social media"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Social media
-        <StyledInput
-          type="radio"
-          value="Friends"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Friends
-        <StyledInput
-          type="radio"
-          value="Found myself"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Found myself
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+          <StyledInput
+            type="radio"
+            value="Social media"
+            {...register('heardAbout', { required: 'This field is required' })}
+          />
+          Social media
+          <StyledInput
+            type="radio"
+            value="Friends"
+            {...register('heardAbout', { required: 'This field is required' })}
+          />
+          Friends
+          <StyledInput
+            type="radio"
+            value="Found myself"
+            {...register('heardAbout', { required: 'This field is required' })}
+          />
+          Found myself
+        </div>
       </StyledCheckboxWrapper>
       {errors.heardAbout && <p>{errors.heardAbout.message}</p>}
 

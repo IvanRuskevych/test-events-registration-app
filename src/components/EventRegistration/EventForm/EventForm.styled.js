@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const StyledEventForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   padding: 20px;
+  width: 400px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -15,15 +15,8 @@ export const StyledLabel = styled.label`
   font-weight: bold;
 `;
 
-export const StyledInputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const StyledInput = styled.input`
-  margin-bottom: 16px;
-  padding: 8px;
+  padding: 0 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
