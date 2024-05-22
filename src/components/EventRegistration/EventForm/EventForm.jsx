@@ -1,27 +1,23 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { useSendData } from '../../../hooks/axiosAPI.js';
 import { selectEventId } from '../../../redux/events/selectors.js';
+import { FIELDS_PATTERN } from '../../../constants';
 
-import {
-  StyledButton,
-  StyledCheckboxWrapper,
-  StyledEventForm,
-  StyledInput,
-  StyledLabel,
-} from './EventForm.styled.js';
 import FormField from './FormField/FormField.jsx';
-import { FIELDS_PATTERN } from '../../../constants/index.js';
+import FormCheckBox from './FormCheckBox/FormCheckBox.jsx';
+import { StyledButton, StyledEventForm } from './EventForm.styled.js';
+import { toast } from 'react-toastify';
 
 const EventForm = () => {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm({ mode: 'onChange' });
+
+    formState: { errors, isValid, isLoading },
+  } = useForm();
   const { sendData } = useSendData();
 
   const eventId = useSelector(selectEventId);
@@ -29,6 +25,12 @@ const EventForm = () => {
   const handleSubmitForm = async data => {
     const newParticipant = { ...data, eventId };
     await sendData('/participants', newParticipant);
+    if (isLoading) {
+      toast.info('Please wait ...');
+    }
+    if (isValid) {
+      toast.success('You have successfully registered for this event.');
+    }
     reset();
   };
 
@@ -72,38 +74,18 @@ const EventForm = () => {
         fieldErrors={errors.dateOfBirth}
       />
 
-      <StyledLabel>Where did you hear about this event?</StyledLabel>
-      <StyledCheckboxWrapper>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-          <StyledInput
-            type="radio"
-            value="Social media"
-            {...register('heardAbout', { required: 'This field is required' })}
-          />
-          Social media
-          <StyledInput
-            type="radio"
-            value="Friends"
-            {...register('heardAbout', { required: 'This field is required' })}
-          />
-          Friends
-          <StyledInput
-            type="radio"
-            value="Found myself"
-            {...register('heardAbout', { required: 'This field is required' })}
-          />
-          Found myself
-        </div>
-      </StyledCheckboxWrapper>
-      {errors.heardAbout && <p>{errors.heardAbout.message}</p>}
+      <FormCheckBox
+        name={'heardAbout'}
+        title={'Where did you hear about this event?'}
+        validation={register('heardAbout', {
+          required: 'Please answer the question: "Where did you hear about this event?"',
+        })}
+        fieldErrors={errors.heardAbout}
+      />
 
       <StyledButton type="submit">Register</StyledButton>
     </StyledEventForm>
   );
-};
-
-EventForm.propTypes = {
-  onSubmit: PropTypes.func,
 };
 
 export default EventForm;

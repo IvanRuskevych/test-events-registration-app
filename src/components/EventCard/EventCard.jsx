@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setEventId, setEventTitle } from '../../redux/events/slice.js';
-
 import {
   StyledEventCard,
   StyledEventDate,
@@ -20,6 +19,7 @@ const EventCard = ({ event }) => {
 
   const handleRegisterLinkClick = () => {
     dispatch(setEventId(_id));
+    dispatch(setEventTitle(title));
   };
 
   const handleViewLinkClick = () => {

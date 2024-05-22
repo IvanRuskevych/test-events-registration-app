@@ -1,21 +1,29 @@
 import PropTypes from 'prop-types';
 import { StyledFormFieldWrapper, StyledInput, StyledLabel } from './FormField.styled.js';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
-const FormField = ({ type, fieldErrors, validation, title }) => {
+const FormField = ({ type, title, fieldErrors, validation }) => {
+  useEffect(() => {
+    if (fieldErrors) {
+      toast.error(fieldErrors.message);
+    }
+  }, [fieldErrors]);
+
   return (
-    <StyledFormFieldWrapper>
-      <StyledLabel>{title}</StyledLabel>
-      <StyledInput type={type} {...validation} />
-      {fieldErrors && <p role="alert">{fieldErrors.message}</p>}
-    </StyledFormFieldWrapper>
+    <>
+      <StyledFormFieldWrapper>
+        <StyledLabel>{title}</StyledLabel>
+        <StyledInput type={type} {...validation} />
+      </StyledFormFieldWrapper>
+    </>
   );
 };
 
 FormField.propTypes = {
-  type: PropTypes.string,
   title: PropTypes.string.isRequired,
+  type: PropTypes.string,
   fieldErrors: PropTypes.object,
-  // className: PropTypes.string,
   validation: PropTypes.shape({
     required: PropTypes.string,
     minLength: PropTypes.shape({

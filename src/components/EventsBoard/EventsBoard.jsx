@@ -14,7 +14,6 @@ const EventsBoard = () => {
   const [search, setSearch] = useState('');
   const [hasMore, setHasMore] = useState(true);
   const page = useSelector(selectPage);
-
   const events = useSelector(selectEvents);
   const total = useSelector(selectTotal);
 
