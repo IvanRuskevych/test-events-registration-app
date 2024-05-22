@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledEventCard = styled.li`
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--clr-bg-event-card);
+  border: 1px solid var(--clr-border);
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -21,13 +21,13 @@ export const StyledEventDescription = styled.p`
 
 export const StyledEventDate = styled.p`
   font-size: 0.9em;
-  color: #555;
+  color: var(--clr-text-grey);
   margin-bottom: 10px;
 `;
 
 export const StyledEventOrganizer = styled.p`
   font-size: 0.9em;
-  color: #555;
+  color: var(--clr-text-grey);
   margin-bottom: 10px;
 `;
 
@@ -37,25 +37,26 @@ export const StyledLinkContainer = styled.div`
 `;
 
 export const StyledRegisterLink = styled(Link)`
-  background-color: #007bff;
-  color: white;
+  background-color: var(--clr-bg-button-register);
+  color: var(--clr-text-white);
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
+
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--clr-bg-button-register-hover);
   }
 `;
 
 export const StyledViewLink = styled(Link)`
-  background-color: #28a745;
-  color: white;
+  background-color: var(--clr-bg-button-view);
+  color: var(--clr-text-white);
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
   &:hover {
-    background-color: #218838;
+    background-color: var(--clr-bg-button-view-hover);
   }
 `;
