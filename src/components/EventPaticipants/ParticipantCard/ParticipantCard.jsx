@@ -7,7 +7,7 @@ import {
 
 const ParticipantCard = ({ participant }) => {
   return (
-    <StyledItem className="participant-card">
+    <StyledItem>
       <StyledParticipantName>{participant.fullName}</StyledParticipantName>
       <StyledParticipantEmail>{participant.email}</StyledParticipantEmail>
     </StyledItem>
