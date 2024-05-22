@@ -6,7 +6,7 @@ import { selectEvents, selectPage, selectTotal } from '../../redux/events/select
 import { getAllEventsThunk } from '../../redux/events/operations.js';
 import { formatEventDate } from '../../utils';
 
-import EventCard from '../EventCard/EventCard.jsx';
+import EventCard from './EventCard/EventCard.jsx';
 import { StyledContainer, StyledEventTitle, StyledInput } from './EventsBoard.styled.js';
 
 const EventsBoard = () => {
