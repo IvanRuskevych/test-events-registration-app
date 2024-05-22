@@ -1,25 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { useSendData } from '../../../hooks/axiosAPI.js';
 import { selectEventId } from '../../../redux/events/selectors.js';
+import { FIELDS_PATTERN } from '../../../constants';
 
-import {
-  StyledButton,
-  StyledCheckboxWrapper,
-  StyledEventForm,
-  StyledInput,
-  StyledInputWrapper,
-  StyledLabel,
-} from './EventForm.styled.js';
+import FormField from './FormField/FormField.jsx';
+import FormCheckBox from './FormCheckBox/FormCheckBox.jsx';
+import { StyledButton, StyledEventForm } from './EventForm.styled.js';
+import { toast } from 'react-toastify';
 
 const EventForm = () => {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+
+    formState: { errors, isValid, isLoading },
   } = useForm();
   const { sendData } = useSendData();
 
@@ -28,62 +25,67 @@ const EventForm = () => {
   const handleSubmitForm = async data => {
     const newParticipant = { ...data, eventId };
     await sendData('/participants', newParticipant);
+    if (isLoading) {
+      toast.info('Please wait ...');
+    }
+    if (isValid) {
+      toast.success('You have successfully registered for this event.');
+    }
     reset();
   };
 
   return (
     <StyledEventForm onSubmit={handleSubmit(handleSubmitForm)}>
-      <StyledInputWrapper>
-        <StyledLabel>Full Name</StyledLabel>
-        <StyledInput {...register('fullName', { required: 'Full name is required' })} />
-      </StyledInputWrapper>
-      {errors.fullName && <p>{errors.fullName.message}</p>}
+      <FormField
+        name={'fullName'}
+        title={'Full Name'}
+        validation={register('fullName', {
+          required: 'Full name is required',
+          minLength: {
+            value: 2,
+            message: 'Має бути від 2 до 35 символів',
+          },
+          maxLength: {
+            value: 35,
+            message: 'Має бути від 2 до 35 символів',
+          },
+        })}
+        fieldErrors={errors.fullName}
+      />
 
-      <StyledInputWrapper>
-        <StyledLabel>Email</StyledLabel>
-        <StyledInput type="email" {...register('email', { required: 'Email is required' })} />
-      </StyledInputWrapper>
-      {errors.email && <p>{errors.email.message}</p>}
+      <FormField
+        name={'email'}
+        title={'Email'}
+        validation={register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: FIELDS_PATTERN.EMAIL,
+            message: 'Не відповідає формату *@*.*',
+          },
+        })}
+        fieldErrors={errors.email}
+      />
 
-      <StyledInputWrapper>
-        <StyledLabel>Date of Birth</StyledLabel>
-        <StyledInput
-          type="date"
-          {...register('dateOfBirth', { required: 'Date of birth is required' })}
-        />
-      </StyledInputWrapper>
-      {errors.dateOfBirth && <p>{errors.dateOfBirth.message}</p>}
+      <FormField
+        type="date"
+        name={'dateOfBirth'}
+        title={'Date of Birth'}
+        validation={register('dateOfBirth', { required: 'Date of birth is required' })}
+        fieldErrors={errors.dateOfBirth}
+      />
 
-      <StyledLabel>Where did you hear about this event?</StyledLabel>
-      <StyledCheckboxWrapper>
-        <StyledInput
-          type="radio"
-          value="Social media"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Social media
-        <StyledInput
-          type="radio"
-          value="Friends"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Friends
-        <StyledInput
-          type="radio"
-          value="Found myself"
-          {...register('heardAbout', { required: 'This field is required' })}
-        />
-        Found myself
-      </StyledCheckboxWrapper>
-      {errors.heardAbout && <p>{errors.heardAbout.message}</p>}
+      <FormCheckBox
+        name={'heardAbout'}
+        title={'Where did you hear about this event?'}
+        validation={register('heardAbout', {
+          required: 'Please answer the question: "Where did you hear about this event?"',
+        })}
+        fieldErrors={errors.heardAbout}
+      />
 
       <StyledButton type="submit">Register</StyledButton>
     </StyledEventForm>
   );
-};
-
-EventForm.propTypes = {
-  onSubmit: PropTypes.func,
 };
 
 export default EventForm;

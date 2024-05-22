@@ -7,5 +7,5 @@ export const StyledEventRegistrationContainer = styled.div`
 `;
 
 export const StyledTitle = styled.h1`
-  margin: 20px;
+  margin-bottom: 20px;
 `;
