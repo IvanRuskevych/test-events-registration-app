@@ -29,7 +29,7 @@ const EventParticipants = () => {
   };
 
   return (
-    <StyledEventParticipants className="event-participants">
+    <StyledEventParticipants>
       <h2>{`"${eventTitle}" participants`}</h2>
       <StyledInput
         type="text"
