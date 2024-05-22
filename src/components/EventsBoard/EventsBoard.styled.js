@@ -8,7 +8,7 @@ export const StyledEventTitle = styled.h2`
 export const StyledInput = styled.input`
   margin-bottom: 16px;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--clr-border);
   border-radius: 4px;
   font-size: 16px;
 `;

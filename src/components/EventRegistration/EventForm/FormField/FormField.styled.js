@@ -13,7 +13,7 @@ export const StyledInput = styled.input`
   height: 40px;
   width: 100%;
   padding: 0 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--clr-border);
   border-radius: 4px;
   font-size: 16px;
 `;

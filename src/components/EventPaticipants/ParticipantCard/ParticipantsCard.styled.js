@@ -4,11 +4,9 @@ export const StyledItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   padding: 16px;
-  background-color: #f9f9f9;
-
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--clr-box-shadow);
   width: 200px;
   min-width: 200px;
 `;
@@ -16,10 +14,9 @@ export const StyledItem = styled.li`
 export const StyledParticipantName = styled.h3`
   margin-bottom: 10px;
   font-size: 1.2rem;
-  color: #333;
 `;
 
 export const StyledParticipantEmail = styled.p`
   font-size: 0.7rem;
-  color: #666;
+  color: var(--clr-text-grey);
 `;
