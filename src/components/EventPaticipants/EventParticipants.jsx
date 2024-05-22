@@ -29,21 +29,23 @@ const EventParticipants = () => {
   };
 
   return (
-    <StyledEventParticipants>
-      <h2>{`"${eventTitle}" participants`}</h2>
-      <StyledInput
-        type="text"
-        placeholder="Search by name or email"
-        value={search}
-        onChange={handleSearch}
-      />
-      <StyledParticipantsList>
-        {participants &&
-          filteredParticipants.map(participant => (
-            <ParticipantCard key={participant._id} participant={participant} />
-          ))}
-      </StyledParticipantsList>
-    </StyledEventParticipants>
+    <>
+      <StyledEventParticipants>
+        <h2>{`"${eventTitle}" participants`}</h2>
+        <StyledInput
+          type="text"
+          placeholder="Search by name or email"
+          value={search}
+          onChange={handleSearch}
+        />
+        <StyledParticipantsList>
+          {participants &&
+            filteredParticipants.map(participant => (
+              <ParticipantCard key={participant._id} participant={participant} />
+            ))}
+        </StyledParticipantsList>
+      </StyledEventParticipants>
+    </>
   );
 };
 

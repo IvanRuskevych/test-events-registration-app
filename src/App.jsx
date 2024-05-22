@@ -20,7 +20,6 @@ function App() {
       dispatch(getAllEventsThunk({}));
       dispatch(getAllParticipantsThunk());
       dispatch(setEventId(null));
-      dispatch(setEventId(null));
     }
   }, [dispatch, pathname]);
 
