@@ -8,7 +8,6 @@ export const StyledItem = styled.li`
   border-radius: 8px;
   box-shadow: 0 2px 4px var(--clr-box-shadow);
   width: 200px;
-  min-width: 200px;
 `;
 
 export const StyledParticipantName = styled.h3`
